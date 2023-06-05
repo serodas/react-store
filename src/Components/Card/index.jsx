@@ -1,10 +1,10 @@
-const Card = () => {
+const Card = ({data}) => {
     return (
         <div className="bg-white cursor-pointer w-56 h-60">
             <figure className="relative mb-2 w-full h-4/5">
-                <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5"> Electronics</span>
+                <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{data.category.name}</span>
                 <img 
-                    src="https://images.pexels.com/photos/17047402/pexels-photo-17047402/free-photo-of-la-gravedad-del-lugar.jpeg" 
+                    src={data.images[0]} 
                     alt="headphones"
                     className="w-full h-full object-cover rounded-lg"
                 />
@@ -15,8 +15,8 @@ const Card = () => {
                 </span>
             </figure>
             <p className="flex justify-between">
-                <span className="text-sm font-ligth">Headphones</span>
-                <span className="text-sm font-medium">$300</span>
+                <span className="text-sm font-ligth">{data.title}</span>
+                <span className="text-sm font-medium">{data.price}</span>
             </p>
         </div>
     );
