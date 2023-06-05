@@ -7,7 +7,7 @@ const Home = () => {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await fetch('https://api.escuelajs.co/api/v1/products')
+                const response = await fetch("https://api.escuelajs.co/api/v1/products")
                 const data = await response.json()
                 setItems(data)
             } catch (error) {
@@ -25,7 +25,7 @@ const Home = () => {
             ))}
         </div>
        
-    );
+    )
 }
 
 export default Home;
