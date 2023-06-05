@@ -1,11 +1,14 @@
 import { createContext } from "react"
 
 const ShoppingCartContext = createContext()
+const initialState = {}
 
-export const ShoppingCartProvider = ({children}) => {
+const ShoppingCartProvider = ({children}) => {
     return (
-        <ShoppingCartContext.Provider>
+        <ShoppingCartContext.Provider value={initialState}>
             {children}
         </ShoppingCartContext.Provider>
     )
 }
+
+export default ShoppingCartProvider
