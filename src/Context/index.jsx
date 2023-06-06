@@ -1,9 +1,10 @@
 import { createContext } from "react"
+import useInitialState from "../Components/Hooks/useInitialState"
 
 const ShoppingCartContext = createContext()
-const initialState = {}
 
 const ShoppingCartProvider = ({children}) => {
+    const initialState = useInitialState();
     return (
         <ShoppingCartContext.Provider value={initialState}>
             {children}
@@ -11,4 +12,4 @@ const ShoppingCartProvider = ({children}) => {
     )
 }
 
-export default ShoppingCartProvider
+export { ShoppingCartContext, ShoppingCartProvider }
