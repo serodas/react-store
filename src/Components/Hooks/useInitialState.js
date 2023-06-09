@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 const initialState = {
-    count: 0
+    count: 0,
+    isProductDetailOpen: false,
 }
 const useInitialState = () => {
     const [state, setState] = useState(initialState)
@@ -13,9 +14,25 @@ const useInitialState = () => {
         })
     }
 
+    const openProductDetail = () => {
+        setState({
+            ...state,
+            isProductDetailOpen: true
+        })
+    }
+
+    const closeProductDetail = () => {
+        setState({
+            ...state,
+            isProductDetailOpen: false
+        })
+    }
+
     return {
         state,
-        addCount
+        addCount,
+        openProductDetail,
+        closeProductDetail
     }
 }
 
