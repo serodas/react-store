@@ -4,11 +4,12 @@ const initialState = {
     count: 0,
     isProductDetailOpen: false,
     productToShow: {
-        title: "",
-        price: "",
-        description: "",
+        title: '',
+        price: '',
+        description: '',
         images: [],
-    }
+    },
+    cartProducts: [],
 }
 const useInitialState = () => {
     const [state, setState] = useState(initialState)
@@ -38,12 +39,14 @@ const useInitialState = () => {
         setState({
             ...state,
             isProductDetailOpen: true,
+            count: state.count + 1,
             productToShow: {
                 title: product.title,
                 price: product.price,
                 description: product.description,
                 images: product.images,
-            }
+            },
+            cartProducts: [...state.cartProducts, product]
         })
     }
 
@@ -52,7 +55,7 @@ const useInitialState = () => {
         addCount,
         openProductDetail,
         closeProductDetail,
-        addProductToShow
+        addProductToShow,
     }
 }
 
