@@ -3,7 +3,13 @@ import { ShoppingCartContext } from "../../Context";
 import { PlusIcon } from '@heroicons/react/24/solid'
 
 const Card = ({data}) => {
-    const { addProductToShow } = useContext(ShoppingCartContext);
+    const { addProductToShow, addProductToCart } = useContext(ShoppingCartContext);
+
+    const addProductToCartShopping = (event, data) => {
+        event.stopPropagation();
+        addProductToCart(data);
+    }
+    
     return (
         <div 
             className="bg-white cursor-pointer w-56 h-60"
@@ -18,9 +24,11 @@ const Card = ({data}) => {
                 />
                 <span 
                     className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
+                    onClick={(event) => addProductToCartShopping(event,data)}
                 >
                     <PlusIcon 
-                        className='h-6 w-6 text-black'>
+                        className='h-6 w-6 text-black'
+                    >
                     </PlusIcon>
                 </span>
             </figure>

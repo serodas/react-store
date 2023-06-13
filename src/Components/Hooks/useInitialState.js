@@ -3,6 +3,7 @@ import { useState } from "react";
 const initialState = {
     count: 0,
     isProductDetailOpen: false,
+    isCheckoutSideMenuOpen: false,
     productToShow: {
         title: '',
         price: '',
@@ -39,14 +40,28 @@ const useInitialState = () => {
         setState({
             ...state,
             isProductDetailOpen: true,
-            count: state.count + 1,
             productToShow: {
                 title: product.title,
                 price: product.price,
                 description: product.description,
                 images: product.images,
             },
+        })
+    }
+
+    const addProductToCart = (product) => {
+        setState({
+            ...state,
+            count: state.count + 1,
+            isCheckoutSideMenuOpen: true,
             cartProducts: [...state.cartProducts, product]
+        })
+    }
+
+    const closeCheckoutSideMenu = () => {
+        setState({
+            ...state,
+            isCheckoutSideMenuOpen: false
         })
     }
 
@@ -56,6 +71,8 @@ const useInitialState = () => {
         openProductDetail,
         closeProductDetail,
         addProductToShow,
+        closeCheckoutSideMenu,
+        addProductToCart,
     }
 }
 
