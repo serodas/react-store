@@ -11,6 +11,7 @@ const initialState = {
         images: [],
     },
     cartProducts: [],
+    order: [],
 }
 const useInitialState = () => {
     const [state, setState] = useState(initialState)
@@ -72,6 +73,14 @@ const useInitialState = () => {
         })
     }
 
+    const setOrder = (order) => {
+        setState({
+            ...state,
+            order: [...state.order, order],
+            cartProducts: [],
+        })
+    }
+
     return {
         state,
         addCount,
@@ -81,6 +90,7 @@ const useInitialState = () => {
         closeCheckoutSideMenu,
         addProductToCart,
         setCartProducts,
+        setOrder,
     }
 }
 
