@@ -18,7 +18,7 @@ const CheckoutSideMenu = () => {
                 >
                 </XMarkIcon>
             </div>
-            <div className='px-3'>
+            <div className='px-3 overflow-y-scroll'>
                 { state.cartProducts.map(product => (
                     <OrderCart key={product.id} title={product.title} imageUrl={product.images} price={product.price}/>
                 ))}

@@ -1,13 +1,43 @@
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
-import { PlusIcon } from '@heroicons/react/24/solid'
+import { PlusIcon, CheckIcon } from '@heroicons/react/24/solid'
 
 const Card = ({data}) => {
-    const { addProductToShow, addProductToCart } = useContext(ShoppingCartContext);
+    const { state, addProductToShow, addProductToCart } = useContext(ShoppingCartContext);
 
     const addProductToCartShopping = (event, data) => {
-        event.stopPropagation();
-        addProductToCart(data);
+        event.stopPropagation()
+        addProductToCart(data)
+    }
+
+    const renderIcon = (id) => {
+        const isInCart = state.cartProducts.filter(product => product.id === id).length > 0;
+
+        if(isInCart) {
+            return (
+                <div 
+                    className="absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 p-1"
+                    onClick={(event) => addProductToCartShopping(event,data)}
+                >
+                    <CheckIcon 
+                        className='h-6 w-6 text-white'
+                    >
+                    </CheckIcon>
+                </div>
+            )
+        } else {
+            return (
+                <div 
+                    className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
+                    onClick={(event) => addProductToCartShopping(event,data)}
+                >
+                    <PlusIcon 
+                        className='h-6 w-6 text-black'
+                    >
+                    </PlusIcon>
+                </div>
+            )
+        }
     }
     
     return (
@@ -22,15 +52,7 @@ const Card = ({data}) => {
                     alt={data.title}
                     className="w-full h-full object-cover rounded-lg"
                 />
-                <span 
-                    className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
-                    onClick={(event) => addProductToCartShopping(event,data)}
-                >
-                    <PlusIcon 
-                        className='h-6 w-6 text-black'
-                    >
-                    </PlusIcon>
-                </span>
+            {renderIcon(data.id)}
             </figure>
             <p className="flex justify-between">
                 <span className="text-sm font-ligth">{data.title}</span>
