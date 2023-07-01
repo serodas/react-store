@@ -65,6 +65,13 @@ const useInitialState = () => {
         })
     }
 
+    const setCartProducts = (products) => {
+        setState({
+            ...state,
+            cartProducts: products
+        })
+    }
+
     return {
         state,
         addCount,
@@ -73,6 +80,7 @@ const useInitialState = () => {
         addProductToShow,
         closeCheckoutSideMenu,
         addProductToCart,
+        setCartProducts,
     }
 }
 

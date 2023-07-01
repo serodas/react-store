@@ -5,7 +5,13 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import './styles.css'
 
 const CheckoutSideMenu = () => {
-    const { state, closeCheckoutSideMenu } = useContext(ShoppingCartContext);
+    const { state, closeCheckoutSideMenu , setCartProducts} = useContext(ShoppingCartContext);
+
+    const handleDeleteProduct = (id) => {
+        const filteredProducts = state.cartProducts.filter(product => product.id !== id);
+        setCartProducts(filteredProducts);
+    }
+
     return (
         <aside
             className={`checkout-side-menu ${state.isCheckoutSideMenuOpen ? 'flex' : 'hidden'} flex-col fixed right-0 border border-black rounded-lg bg-white`}
@@ -20,7 +26,14 @@ const CheckoutSideMenu = () => {
             </div>
             <div className='px-3 overflow-y-scroll'>
                 { state.cartProducts.map(product => (
-                    <OrderCart key={product.id} title={product.title} imageUrl={product.images} price={product.price}/>
+                    <OrderCart 
+                        key={product.id}
+                        id={product.id} 
+                        title={product.title} 
+                        imageUrl={product.images} 
+                        price={product.price}
+                        handleDeleteProduct={handleDeleteProduct}
+                    />
                 ))}
             </div>
         </aside>
