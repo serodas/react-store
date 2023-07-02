@@ -1,6 +1,6 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
-const OrderCart = ({id, title, imageUrl, price, handleDeleteProduct}) => {
+const OrderCard = ({id, title, imageUrl, price, handleDeleteProduct}) => {
     return (
         <div className='flex justify-between items-center mb-3'>
             <div className='flex items-center gap-2'>
@@ -23,4 +23,4 @@ const OrderCart = ({id, title, imageUrl, price, handleDeleteProduct}) => {
     );
 }
 
-export default OrderCart;
+export default OrderCard;

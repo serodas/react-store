@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCartContext } from '../../Context';
-import OrderCart from '../OrderCart';
+import OrderCard from '../OrderCard';
 import totalPrice from '../../Utils';
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import './styles.css'
@@ -39,7 +39,7 @@ const CheckoutSideMenu = () => {
             </div>
             <div className='px-3 overflow-y-scroll flex-1'>
                 { state.cartProducts.map(product => (
-                    <OrderCart 
+                    <OrderCard 
                         key={product.id}
                         id={product.id} 
                         title={product.title} 
