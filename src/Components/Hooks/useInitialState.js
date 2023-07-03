@@ -71,7 +71,8 @@ const useInitialState = () => {
     const setCartProducts = (products) => {
         setState({
             ...state,
-            cartProducts: products
+            cartProducts: products,
+            count: products.length,
         })
     }
 
@@ -80,6 +81,8 @@ const useInitialState = () => {
             ...state,
             order: [...state.order, order],
             cartProducts: [],
+            count: 0,
+            searchValue: '',
         })
     }
 
