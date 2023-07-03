@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const initialState = {
     count: 0,
@@ -12,6 +12,8 @@ const initialState = {
     },
     cartProducts: [],
     order: [],
+    items: [],
+    searchValue: '',
 }
 const useInitialState = () => {
     const [state, setState] = useState(initialState)
@@ -81,6 +83,30 @@ const useInitialState = () => {
         })
     }
 
+    const setSearchValue = (value) => {
+        setState({
+            ...state,
+            searchValue: value
+        })
+    }
+
+    useEffect(() => {
+        const fetchItems = async () => {
+            try {
+                const response = await fetch("https://api.escuelajs.co/api/v1/products")
+                const data = await response.json()
+                setState({
+                    ...state,
+                    items: data
+                })
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchItems()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return {
         state,
         addCount,
@@ -91,6 +117,7 @@ const useInitialState = () => {
         addProductToCart,
         setCartProducts,
         setOrder,
+        setSearchValue,
     }
 }
 

@@ -1,29 +1,44 @@
-import  { useState, useEffect } from "react";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
 import CheckoutSideMenu from "../../Components/CheckoutSideMenu";
+import { ShoppingCartContext } from "../../Context";
 
 const Home = () => {
-    const [items, setItems] = useState([])
+    const { state, setSearchValue } = useContext(ShoppingCartContext)
 
-    useEffect(() => {
-        const fetchItems = async () => {
-            try {
-                const response = await fetch("https://api.escuelajs.co/api/v1/products")
-                const data = await response.json()
-                setItems(data)
-            } catch (error) {
-                console.error(error)
-            }
-        }
-        fetchItems()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    const params = useParams();
+    const category = params.category
+
+    let filteredItems = [];
+    if(state.searchValue.length === 0) {
+      filteredItems = state.items;
+    } else {
+      filteredItems = state.items.filter((item) => {
+          return item.title.toLowerCase().includes(state.searchValue.toLowerCase());
+      });
+    }
+
+    if(category) {
+        filteredItems = filteredItems.filter((item) => {
+            return item.category.name.toLowerCase().includes(category.toLowerCase());
+        });
+    }
 
     return (
         <>
+            <div className='flex items-center justify-center relative w-80 mb-6'>
+                <h1 className='font-medium text-xl'>Exclusive Products</h1>
+            </div>
+            <input 
+                type="text" 
+                placeholder="Search a product" 
+                className="w-80 max-w-screen-lg px-4 py-2 mb-6 border border-gray-300 rounded-md focus:outline-none"
+                onChange={(e) => setSearchValue(e.target.value)}
+            />
             <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-                { items?.map((item) => (
+                { filteredItems?.map((item) => (
                     <Card key={item.id} data={item}/>
                 ))}
             </div>
